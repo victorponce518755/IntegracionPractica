@@ -1,0 +1,4 @@
+CREATE DATABASE Receta;
+
+USE DATABASE Receta;
+
