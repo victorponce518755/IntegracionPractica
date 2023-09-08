@@ -6,6 +6,14 @@ CREATE TABLE Ingredientes (
 );
 
 
+CREATE TABLE Receta (
+	idReceta INT NOT NULL,
+	nombre_receta VARCHAR(50) NOT NULL,
+	PRIMARY KEY (idReceta)
+);
+
+
+
 CREATE TABLE RecetaIngrediente (
 	id_receta INT NOT NULL,
 	id_ingrediente INT NOT NULL,
@@ -13,13 +21,6 @@ CREATE TABLE RecetaIngrediente (
 	PRIMARY KEY (id_receta, id_ingrediente),
 	FOREIGN KEY (id_ingrediente) REFERENCES Ingredientes(idIngrediente),
 	FOREIGN KEY (id_receta) REFERENCES Receta(idReceta)
-);
-
-
-CREATE TABLE Receta (
-	idReceta INT NOT NULL,
-	nombre_receta VARCHAR(50) NOT NULL,
-	PRIMARY KEY (idReceta)
 );
 
 

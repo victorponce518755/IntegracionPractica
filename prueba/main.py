@@ -26,7 +26,12 @@ def generate_xml_data():
 
     root = ET.Element('raiz')
     for row in info_Receta:
-        ET.SubElement
+        ingrediente = ET.SubElement(root, 'ingrediente')
+        nombre = ET.SubElement(ingrediente, 'nombre')
+        cantidad = ET.SubElement(ingrediente, 'cantidad')
+        nombre.text = row['nombre_ingrediente']
+        cantidad.text = str(row['cantidad'])
+
 
     tree = ET.ElementTree(root)
     return tree
