@@ -1,12 +1,15 @@
 from flask import Flask, Response, render_template,redirect, url_for, request, get_flashed_messages, flash
 from flask_mysqldb import MySQL
 import xml.etree.ElementTree as ET
+from lxml import etree
+import os
+
 
 app = Flask(__name__)
 
 app.secret_key = '1234'
 
-# MySQL Configuration
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'srv_user'
 app.config['MYSQL_PASSWORD'] = '4335'
@@ -72,6 +75,33 @@ def insertarConcierto():
         return redirect('/insert')
     
     return render_template('formulario.html')
+    
+
+@app.route('/concierto/<int:id>')
+def display_xml_concierto(id):
+    with mysql.connection.cursor() as cursor:
+        cursor.callproc("conciertos_artista", (id,))
+        info_concierto = cursor.fetchall()
+
+    root = etree.Element('raiz')
+    for row in info_concierto:
+        boleto = etree.SubElement(root, 'boleto')
+        nombre_artista = etree.SubElement(boleto, 'nombre_artista')
+        nombre_concierto = etree.SubElement(boleto, 'nombre_concierto')
+        fecha = etree.SubElement(boleto, 'fecha')
+        ubicacion = etree.SubElement(boleto, 'ubicacion')
+        nombre_artista.text = row['nombre_artista']
+        nombre_concierto.text = row['nombre_concierto']
+        fecha.text = str(row['fecha'])
+        ubicacion.text = row['ubicacion']
+
+    tree = etree.ElementTree(root)
+    
+    arbol_xsl = etree.parse(os.path.join('xsl', 'transformacionC.xsl'))
+    transformacion= etree.XSLT(arbol_xsl)
+    xml_transformado = transformacion(root)
+
+    return Response(etree.tostring(xml_transformado, encoding='utf-8'), content_type='text/html')
     
 
 

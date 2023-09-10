@@ -46,7 +46,7 @@ INSERT INTO RecetaIngrediente (id_receta, id_ingrediente, cantidad) VALUES (3, 3
 
 
 /*
-Stored procedure
+Stored procedures
 */
 
 DELIMITER $$
@@ -57,3 +57,14 @@ END$$
 DELIMITER ;
 
 CALL dameIngredientes(1);
+
+
+
+DELIMITER $$
+CREATE PROCEDURE dameIngredientes2 (IN idReceta INT)
+BEGIN
+	SELECT nombre_receta, nombre_ingrediente, cantidad FROM RecetaIngrediente JOIN Ingredientes ON RecetaIngrediente.id_ingrediente = Ingredientes.idIngrediente JOIN Receta ON RecetaIngrediente.id_receta = Receta.idReceta WHERE id_receta = idReceta;
+END$$
+DELIMITER ;
+
+CALL dameIngredientes2(1);

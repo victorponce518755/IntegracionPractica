@@ -1,12 +1,14 @@
 from flask import Flask, Response, render_template,redirect, url_for, request, get_flashed_messages, flash
 from flask_mysqldb import MySQL
 import xml.etree.ElementTree as ET
+from lxml import etree
+import os
 
 app = Flask(__name__)
 
 app.secret_key = '1234'
 
-# MySQL Configuration
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'srv_user'
 app.config['MYSQL_PASSWORD'] = '4335'
@@ -19,7 +21,6 @@ def generate_xml_data():
     cursor = mysql.connection.cursor()
 
 
-#en el cursor execute manda a llamar al store procedure llamado dameIngredientes, que recibe un  id de entrada que viene del link
     cursor.execute("CALL dameIngredientes(1)")
     info_Receta = cursor.fetchall()
     
@@ -44,7 +45,6 @@ def display_xml():
     return Response(xml_string, content_type='text/xml')
 
 
-#########Nos falta modificar las queries para que hagan todo de un jalon, ademas checar que este bien el nombre de los campos de la tabla######
 @app.route('/insertar', methods=['GET','POST'])
 def insertarIngrediente():
     if request.method == 'POST':
@@ -86,21 +86,30 @@ def insertarIngrediente():
     return render_template('formularioInsertar.html', messages=get_flashed_messages())
 
 
-#Esta es una ruta que nos regresa la informacion de la RecetaIngrediente, es decir del id que le pasemos, nos regresa el nombre del ingrediente, la cantidad y el nombre de la receta
 
-@app.route('/recetaIngrediente/<string:id>')
-def recetaIngrediente(id):
-    cursor = mysql.connection.cursor()
-    cursor.execute("SELECT Receta.nombre_receta, Ingredientes.nombre_ingrediente, RecetaIngrediente.cantidad FROM RecetaIngrediente INNER JOIN Receta ON RecetaIngrediente.id_receta = Receta.idReceta INNER JOIN Ingredientes ON RecetaIngrediente.id_ingrediente = Ingredientes.idIngrediente WHERE RecetaIngrediente.id_receta = %s", (id,))
-    info_RecetaIngrediente = cursor.fetchall()
+@app.route('/receta/<int:id>')
+def display_xml_receta(id):
+    with mysql.connection.cursor() as cursor:
+        cursor.callproc("dameIngredientes2", (id,))
+        info_Receta = cursor.fetchall()
+        
+    root = etree.Element('raiz')
+    for row in info_Receta:
+        receta = etree.SubElement(root, 'receta')
+        nombre_receta= etree.SubElement(receta, 'nombre_receta')
+        nombre_ingrediente = etree.SubElement(receta, 'nombre_ingrediente')
+        cantidad = etree.SubElement(receta, 'cantidad')
+        nombre_receta.text = row['nombre_receta']
+        nombre_ingrediente.text = row['nombre_ingrediente']
+        cantidad.text = str(row['cantidad'])
     
-    cursor.close()
-    
-    
-    print(info_RecetaIngrediente)
-    
-    return render_template('recetaIngrediente.html', recetaIngrediente = info_RecetaIngrediente)
+    tree = etree.ElementTree(root)
 
+    arbol_xsl = etree.parse(os.path.join('xsl', 'transformacionR.xsl'))
+    transformacion= etree.XSLT(arbol_xsl)
+    xml_transformado = transformacion(root)
+
+    return Response(etree.tostring(xml_transformado, encoding='utf-8'), content_type='text/html')
 
 if __name__ == '__main__':
     app.run(debug=True)
