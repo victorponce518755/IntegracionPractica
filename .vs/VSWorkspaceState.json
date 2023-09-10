@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\prueba",
-    "\\Prueba2"
+    "\\Prueba2",
+    "\\prueba\\Templates"
   ],
-  "SelectedNode": "\\prueba\\main.sql",
+  "SelectedNode": "\\prueba\\main.py",
   "PreviewInSolutionExplorer": false
 }

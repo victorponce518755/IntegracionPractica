@@ -1,13 +1,13 @@
 
 CREATE TABLE Ingredientes (
-	idIngrediente INT NOT NULL,
+	idIngrediente INT NOT NULL AUTO_INCREMENT,
 	nombre_ingrediente VARCHAR(50) NOT NULL,
 	PRIMARY KEY (idIngrediente)
 );
 
 
 CREATE TABLE Receta (
-	idReceta INT NOT NULL,
+	idReceta INT NOT NULL AUTO_INCREMENT,
 	nombre_receta VARCHAR(50) NOT NULL,
 	PRIMARY KEY (idReceta)
 );
@@ -45,3 +45,15 @@ INSERT INTO RecetaIngrediente (id_receta, id_ingrediente, cantidad) VALUES (3, 3
 
 
 
+/*
+Stored procedure
+*/
+
+DELIMITER $$
+CREATE PROCEDURE dameIngredientes (IN idReceta INT)
+BEGIN
+	SELECT nombre_ingrediente, cantidad FROM RecetaIngrediente JOIN Ingredientes ON RecetaIngrediente.id_ingrediente = Ingredientes.idIngrediente WHERE id_receta = idReceta;
+END$$
+DELIMITER ;
+
+CALL dameIngredientes(1);

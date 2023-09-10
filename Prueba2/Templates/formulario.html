@@ -1,0 +1,50 @@
+<html>
+
+
+<head>
+    <title>Insertar Conciertos</title>
+</head>
+
+
+<body>
+    <h1>Inserte Concierto</h1>
+
+
+    <form method="post">
+
+        <label for="nombre_concierto">Nombre del Concierto</label>
+        <input type="text" name="nombre_concierto" id="nombre_concierto" required>
+
+        <label for="nombre_artista">Nombre del Artista</label>
+        <input type="text" name="nombre_artista" id="nombre_artista" required>
+
+        <label for="ubicacion">Ubicación</label>
+        <input type="text" name="ubicacion" id="ubicacion" required>
+
+        <label for="fecha">Fecha</label>
+        <input type="date" name="fecha" id="fecha" required>
+
+        <label for="genero">Genero</label>
+        <input type="text" name="genero" id="genero" required>
+
+
+        <input type="submit" value="Insertar">
+
+
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+
+</body>
+
+
+</html>

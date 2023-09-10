@@ -8,14 +8,14 @@ Para resolver este problema, puedes normalizar la base de datos y crear una tabl
 
 
 CREATE TABLE Artistas (
-	idArtista INT NOT NULL,
+	idArtista INT NOT NULL AUTO_INCREMENT,
 	nombre_artista VARCHAR(50) NOT NULL,
 	genero VARCHAR(50) NOT NULL,
 	PRIMARY KEY (idArtista)
 );
 
 CREATE TABLE Conciertos (
-	idConcierto INT NOT NULL,
+	idConcierto INT NOT NULL AUTO_INCREMENT,
 	nombre_concierto VARCHAR(50) NOT NULL,
 	fecha DATE NOT NULL,
 	ubicacion VARCHAR(50) NOT NULL,

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Receta</title>
+</head>
+
+<body>
+    <h1>Detalles de la Receta e Ingredientes</h1>
+
+    <h2>Receta</h2>
+
+    {% for info in recetaIngrediente %}
+    <p>Nombre de la Receta: {{ info['nombre_receta'] }}</p>
+    <p>Nombre del Ingrediente: {{ info['nombre_ingrediente'] }}</p>
+    <p>Cantidad: {{ info['cantidad'] }}</p>
+    {% endfor %}
+</body>
+
+</html>
