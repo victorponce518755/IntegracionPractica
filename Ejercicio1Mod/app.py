@@ -2,6 +2,7 @@ from flask import Flask, Response, render_template,redirect, url_for, request, g
 from flask_mysqldb import MySQL
 import xml.etree.ElementTree as ET
 from lxml import etree
+from microservicios.xsl_microservicio import transform_xml
 import os
 
 app = Flask(__name__)
@@ -103,13 +104,13 @@ def display_xml_receta(id):
         nombre_ingrediente.text = row['nombre_ingrediente']
         cantidad.text = str(row['cantidad'])
     
-    tree = etree.ElementTree(root)
+    tree = ET.ElementTree(root)
+    xml_string = ET.tostring(tree.getroot(), encoding='utf-8')
 
-    arbol_xsl = etree.parse(os.path.join('xsl', 'transformacionR.xsl'))
-    transformacion= etree.XSLT(arbol_xsl)
-    xml_transformado = transformacion(root)
+    transformed_xml = transform_xml(xml_string)  # Utiliza el microservicio para transformar el XML
 
-    return Response(etree.tostring(xml_transformado, encoding='utf-8'), content_type='text/html')
+    return Response(transformed_xml, content_type='text/html')
+
 
 
 
