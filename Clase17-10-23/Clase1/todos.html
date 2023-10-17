@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            Mapa de todos los gps
+        </title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!--Creacion del websocket-->
+        <script type="text/javascript">
+            var mapa = ubicacion = new google.maps.Map(document.getElementById('mapa'), {
+                center: {lat: 0, lng: 0},//definimos cordenadas iniciales
+                zoom: 15
+            });
+
+            var todos = {{ datos | tojson | safe }};
+
+            var bounds = new.google.maps.LatLngBounds();
+
+            for (var i = 0 ; i < todos.length; i++ )
+            
+                {
+
+                    var coordenadas = {lat: parseFloat(todos[i][0]), lng: parseFloat(todos[i][0])}; //definimos las coordenadas de cada gps
+
+                    var marker = new google.maps.Marker({ //creamos el marcador
+                        position: coordenadas,
+                        map: mapa,
+                        title: 'Ubicacion del GPS' + (i+1)
+                    });
+                    bounds.extend(coordenadas); //agregamos las coordenadas al mapa
+                }
+                mapa.fitBounds(bounds); //ajustamos el mapa a las coordenadas
+        </script>
+
+    </head>
+</html>
