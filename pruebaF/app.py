@@ -5,6 +5,8 @@ import os
 
 app = Flask(__name__)
 
+XSLT_FOLDER = os.path.join(app.root_path, 'xsl')
+
 #servir archivos estaticos
 app.config['STATIC_FOLDER'] = 'xsl'
 
