@@ -2,7 +2,7 @@ from flask import Flask, Response
 from lxml import etree
 import os
 
-app = Flask(__name)
+app = Flask(__name__)
 
 def transform_xml_to_html(xml_content):
     xslt_file= os.path.join('xsl', 'transformacionR.xsl')
