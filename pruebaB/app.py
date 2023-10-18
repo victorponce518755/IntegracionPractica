@@ -104,7 +104,7 @@ def display_xml_receta(id):
     
     tree = etree.ElementTree(root)
 
-    arbol_xsl = etree.parse(os.path.join('xsl', 'transformacionR.xsl'))
+    arbol_xsl = etree.parse(os.path.join('xsl', 'TR.xsl'))
     transformacion= etree.XSLT(arbol_xsl)
     xml_transformado = transformacion(root)
 
