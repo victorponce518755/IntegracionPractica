@@ -42,6 +42,8 @@ def display_xml_receta(id):
 
         print(xml_content)
         html_content = transform_xml_to_html(xml_content)
+        print("--------------------------------------")
+        print(html_content)
         
         return Response(html_content, content_type='text/html')
     else:
