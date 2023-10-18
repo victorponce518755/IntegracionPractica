@@ -5,36 +5,7 @@
 			<head>
 				<title>Receta</title>
 				<meta charset="utf-8"/>
-                
-				<style>
-					body{
-					background-color: #FFE082;
-					font-family: Arial;
-					font-size: 20px;
-					text-align: center;
-					margin: 0;
-					padding: 0;
-					}
-					h1{
-					color: #007bff;
-					margin-top: 20px;
-					}
-					h2{
-					color: #8D6E63;
-					margin : 10px 0;
-					}
-					p{
-					color: #555;
-					margin: 5px 0;
-					}
-					.blanco{
-					background-color: #fff;
-					padding: 10px;
-					margin: 10px;
-					border-radius: 5px;
-					box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-					}
-				</style>
+                <link rel="stylesheet" type="text/css" href="css/estilo.css" />
 			</head>
 			<body>
 				<h1>Tu receta</h1>
