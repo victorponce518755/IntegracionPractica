@@ -1,4 +1,5 @@
-from flask import Flask, Response, requests
+from flask import Flask, Response
+import requests
 from lxml import etree
 import os
 
