@@ -1,0 +1,43 @@
+<html>
+
+
+<head>
+    <title>Insertar Ingredientes</title>
+</head>
+
+
+<body>
+    <h1>Inserte Ingredientes</h1>
+
+
+    <form method="post">
+
+        <label for="nombre_receta">Nombre de la receta</label>
+        <input type="text" name="nombre_receta" id="nombre_receta" required>
+
+        <label for="nombre">Nombre del ingrediente</label>
+        <input type="text" name="nombre_ingrediente" id="nombre_ingrediente" required>
+
+        <label for="cantidad">Cantidad</label>
+        <input type="number" name="cantidad" id="cantidad" required>
+
+        <input type="submit" value="Insertar">
+
+
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+
+</body>
+
+
+</html>
