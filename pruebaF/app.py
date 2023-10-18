@@ -24,7 +24,9 @@ def transform_xml_to_html(xml_content):
 
     html_content = transform(xml_doc)
 
-    return html_content
+    html_str = str(html_content)
+
+    return html_str
 
 
 @app.route('/receta/<int:id>')
