@@ -82,7 +82,7 @@ def insertarIngrediente():
         
         return redirect('/insertar')
     
-    return render_template('formularioInsertar.html', messages=get_flashed_messages())
+    return render_template('F.html', messages=get_flashed_messages())
 
 
 
