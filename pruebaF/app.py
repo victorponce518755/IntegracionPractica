@@ -39,8 +39,8 @@ def display_xml_receta(id):
     if response.status_code == 200:
         #transformar xml a html
         xml_content = response.text
-        print(xml_content)
         html_content = transform_xml_to_html(xml_content)
+        print(html_content)
         return Response(html_content, content_type='text/html')
     else:
         return "Error al obtener la receta"
