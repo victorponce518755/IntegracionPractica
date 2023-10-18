@@ -4,7 +4,8 @@ import xml.etree.ElementTree as ET
 from lxml import etree
 import os
 
-app = Flask(__name__)
+app = Flask(__name, template_folder='templates')
+
 app.secret_key = '1234'
 
 app.config['MYSQL_HOST'] = 'database-main.cbsqc5jwwjad.us-east-2.rds.amazonaws.com'
