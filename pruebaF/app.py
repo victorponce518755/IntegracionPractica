@@ -1,9 +1,17 @@
-from flask import Flask, Response
+from flask import Flask, Response, send_from_directory
 import requests
 from lxml import etree
 import os
 
 app = Flask(__name__)
+
+#servir archivos estaticos
+app.config['STATIC_FOLDER'] = 'xsl'
+
+@app.route('/xsl/<path:filename>')
+def serve_xsl(filename):
+    return send_from_directory(app.config['XSLT_FOLDER'], filename)
+
 
 def transform_xml_to_html(xml_content):
     xslt_file= os.path.join('xsl', 'TR.xsl')
