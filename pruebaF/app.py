@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response, requests
 from lxml import etree
 import os
 
@@ -19,11 +19,12 @@ def transform_xml_to_html(xml_content):
 @app.route('/receta/<int:id>')
 def display_xml_receta(id):
     #obtener xml del backend
-    response = app.backend.get('/receta'.format(id))
+    backend_url = 'http://35.224.154.129:5000/receta/{}'.format(id)
+    response = requests.get(backend_url)
 
     if response.status_code == 200:
         #transformar xml a html
-        xml_content = response.data.get
+        xml_content = response.text
         html_content = transform_xml_to_html(xml_content)
         return Response(html_content, content_type='text/html')
     else:
