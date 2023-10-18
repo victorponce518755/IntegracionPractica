@@ -32,7 +32,7 @@ def transform_xml_to_html(xml_content):
 @app.route('/receta/<int:id>')
 def display_xml_receta(id):
     #obtener xml del backend
-    backend_url = '35.224.154.129:5000/receta/{}'.format(id)
+    backend_url = 'http://35.224.154.129:5000/receta/{}'.format(id)
     response = requests.get(backend_url)
 
     if response.status_code == 200:
