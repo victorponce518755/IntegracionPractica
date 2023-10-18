@@ -1,4 +1,4 @@
-from flask import Flask, Response, request, render_template, flash, redirect, url_for
+from flask import Flask, Response, request, render_template, flash, redirect, url_for, get_flashed_messages
 from flask_mysqldb import MySQL
 import xml.etree.ElementTree as ET
 from lxml import etree
