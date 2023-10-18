@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 from lxml import etree
 import os
 
-app = Flask(__name, template_folder='templates')
+app = Flask(__name__, template_folder='templates')
 
 app.secret_key = '1234'
 
