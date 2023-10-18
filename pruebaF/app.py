@@ -21,10 +21,13 @@ def transform_xml_to_html(xml_content):
     transform = etree.XSLT(xslt)
 
     xml_doc= etree.fromstring(xml_content)
+    print("soy el xml doc", xml_doc)
 
     html_content = transform(xml_doc)
+    print("soy el html content", html_content)
 
     html_str = str(html_content)
+    print("soy el html str", html_str)
 
     return html_str
 
@@ -40,10 +43,10 @@ def display_xml_receta(id):
         #transformar xml a html
         xml_content = response.text
 
-        print(xml_content)
+        #print(xml_content)
         html_content = transform_xml_to_html(xml_content)
-        print("--------------------------------------")
-        print(html_content)
+        #print("--------------------------------------")
+        #print(html_content)
         
         return Response(html_content, content_type='text/html')
     else:
