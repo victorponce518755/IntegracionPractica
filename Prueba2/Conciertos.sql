@@ -1,5 +1,3 @@
-
-
 CREATE TABLE Artistas (
 	idArtista INT NOT NULL AUTO_INCREMENT,
 	nombre_artista VARCHAR(50) NOT NULL,

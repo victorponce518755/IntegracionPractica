@@ -10,10 +10,10 @@ app = Flask(__name__)
 app.secret_key = '1234'
 
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'srv_user'
-app.config['MYSQL_PASSWORD'] = '4335'
-app.config['MYSQL_DB'] = 'Conciertos2'
+app.config['MYSQL_HOST'] = 'database-main.cbsqc5jwwjad.us-east-2.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'admin'
+app.config['MYSQL_PASSWORD'] = 'Rtxmlp4335'
+app.config['MYSQL_DB'] = 'Conciertos'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
