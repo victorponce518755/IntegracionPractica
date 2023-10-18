@@ -16,7 +16,7 @@ def serve_xsl(filename):
 
 
 def transform_xml_to_html(xml_content):
-    xslt_file= os.path.join('xsl', 'TR.xsl')
+    xslt_file= os.path.join('xsl', 'TC.xsl')
     xslt = etree.parse(xslt_file)
     transform = etree.XSLT(xslt)
 
