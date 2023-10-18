@@ -15,6 +15,8 @@ def serve_xsl(filename):
     return send_from_directory(app.config['XSLT_FOLDER'], filename)
 
 
+
+
 def transform_xml_to_html(xml_content, xsl_content):
     xml_doc = etree.fromstring(xml_content)
     xslt_doc = etree.fromstring(xsl_content)
