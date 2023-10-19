@@ -8,9 +8,9 @@ app = Flask(__name__)
  
 
 #servir archivos estaticos
-app.config['XSLT_FOLDER'] = 'xsl'
+app.config['XSLT_FOLDER'] = 'xsll'
 
-@app.route('/xsl/<path:filename>')
+@app.route('/xsll/<path:filename>')
 def serve_xsl(filename):
     return send_from_directory(app.config['XSLT_FOLDER'], filename)
 
