@@ -97,7 +97,7 @@ def display_xml_concierto(id):
 
     tree = etree.ElementTree(root)
     
-    arbol_xsl = etree.parse('http://35.224.154.129:5001/xsll/T.xsl')
+    arbol_xsl = etree.parse('http://34.31.149.203:5001/xsll/T.xsl')
     transformacion= etree.XSLT(arbol_xsl)
     xml_transformado = transformacion(root)
 
