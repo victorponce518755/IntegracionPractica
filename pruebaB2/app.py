@@ -1,11 +1,11 @@
-from flask import Flask, Response, render_template,redirect, url_for, request, get_flashed_messages, flash
+from flask import Flask, Response, request, render_template, flash, redirect, url_for, get_flashed_messages
 from flask_mysqldb import MySQL
 import xml.etree.ElementTree as ET
 from lxml import etree
 import os
 
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__)
 
 app.secret_key = '1234'
 
